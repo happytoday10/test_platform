@@ -15,4 +15,4 @@ def login_action(request):
         if username == "" or password == "":
           #  return HttpResponse("用户名或密码为空")
             return render(request,"index.html",{"error":"用户名或密码为空！"})
-      #  return render(request,"index.html")
+        return render(request,"index.html")

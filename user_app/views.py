@@ -3,6 +3,7 @@ from django.http import  HttpResponse
 from django.contrib import  auth
 # Create your views here.
 
+#wangli00 18!@#wangli
 def index(request):
    # print(345)
     return render(request,"index.html")
@@ -10,8 +11,8 @@ def index(request):
 #处理登录请求
 def login_action(request):
     if request.method == "POST":
-        username = request.POST.get("user_name","")
-        password = request.POST.get(("password",""))
+        username = request.POST.get("username","")
+        password = request.POST.get("password","")
 
         if username == "" or password == "":
           #  return HttpResponse("用户名或密码为空")
@@ -22,6 +23,6 @@ def login_action(request):
             print(type(user))
             if user is not None:
                 auth.login(request,user)
-                return render(request,"project_manage.py.html")
+                return render(request,"project_manage.html")
             else:
                 return render(request,"index.html",{"error":"用户名或密码错误！"})

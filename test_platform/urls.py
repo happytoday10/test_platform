@@ -19,7 +19,10 @@ from user_app import  views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index),
-    path("login_action/",views.login_action)
+    path("",views.index),
+    path("login_action/",views.login_action),
+   # path('project_manage/',views.project_manage)
 ]
- 
+
+#初始化数据库：python manage.py migrate
+#创建超级管理员 python manage.py createsuperuser   admin 123456

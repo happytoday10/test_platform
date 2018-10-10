@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico"> 这里是icon，就是页面打开后，左上角的那个小图标-->
+
+    <title>我的测试平台-国庆快乐！</title>
+
+    <!-- Bootstrap core CSS 引用cdn--若开发环境不能访问网络，这个是不起作用的，-->
+  <!--  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+
+ <!-- Bootstrap   ###下面的这个连接是没有直接找到，直接引用不了，这样直接把链接放上，问题就解决了 -->
+  <!--  <link href="https://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
+-->
+
+      <!-- 静态文件，直接引用本地的文件-->
+
+      {% load static %}
+      <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css" %}>
+
+      <link rel="stylesheet" type="text/css" href={% static "css/signin.css" %}
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+
+  </head>
+
+  <body>
+
+    <div class="container">
+        <!--  -->
+
+      <form class="form-signin" action="/login_action/" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="username" class="sr-only">username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="username" required >
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        {{ error }}
+          {% csrf_token%}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">submit</button>
+      </form>
+
+    </div> <!-- /container -->
+
+
+  </body>
+</html>
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <form action="login_action/" method="post">
+                <p>用户名: <input type="text" name="username" /></p>
+                <p>密&nbsp;&nbsp;&nbsp;&nbsp;码: <input type="password" name="password" /></p>
+          这里是之前的写的比较简单的登录，上面是采用bootstrap后的，复制现成的有格式的      -->
+
+      <!--         {{ error }} <br>-->
+      <!--        -->
+    <!--
+                <input type="submit" value="Submit"/>
+            </form>
+</head>
+<body>
+
+</body>
+</html>
+-->

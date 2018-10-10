@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",views.index),
     path("login_action/",views.login_action),
-   # path('project_manage/',views.project_manage)
+    path('project_manage/',views.project_manage)
 ]
 
 #初始化数据库：python manage.py migrate

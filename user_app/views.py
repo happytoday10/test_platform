@@ -44,4 +44,10 @@ def project_manage(request):
     #username  = request.COOKIES.get('user','')
     #return render(request,"project_manage.html",{"user":username})
     username = request.session.get('user1','')
-    return render(request,"project_manage.html",{"user",username})
+    return render(request,"project_manage.html",{"user":username})
+
+#退出登录，清除登录状态
+def logout(request):
+    auth.logout(request)
+    response = HttpResponseRedirect('/')
+    return response

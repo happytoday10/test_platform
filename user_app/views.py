@@ -3,6 +3,7 @@ from django.http import  HttpResponse,HttpResponseRedirect
 
 from django.contrib import  auth
 from django.contrib.auth.decorators import login_required
+from user_app.models import Project,Module
 # Create your views here.
 
 #wangli00 18!@#wangli
@@ -46,7 +47,12 @@ def project_manage(request):
     #username  = request.COOKIES.get('user','')
     #return render(request,"project_manage.html",{"user":username})
     username = request.session.get('user1','')
-    return render(request,"project_manage.html",{"user":username})
+
+    #显示出实际数据
+    project_all = Project.objects.all()
+    print(project_all)
+    return render(request,"project_manage.html",{"user":username,
+                                                 "projects":project_all})
 
 #退出登录，清除登录状态
 def logout(request):

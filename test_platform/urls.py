@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from user_app import  views
 
 urlpatterns = [
@@ -23,7 +23,11 @@ urlpatterns = [
     path("login_action/",views.login_action),
     path("logout/",views.logout),
     path("accounts/login/",views.index),
-    path('project_manage/',views.project_manage)
+   # path('project_manage/',views.project_manage),
+    #path("add_project/", views.add_project)
+
+    #这里把一级目录是manage的指定到 project_app目录下的urls文件
+     path("manage/",include("project_app.urls"))
 ]
 
 #初始化数据库：python manage.py migrate

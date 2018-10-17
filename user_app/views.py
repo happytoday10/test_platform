@@ -3,7 +3,7 @@ from django.http import  HttpResponse,HttpResponseRedirect
 
 from django.contrib import  auth
 from django.contrib.auth.decorators import login_required
-from user_app.models import Project,Module
+#from user_app.models import Project,Module
 # Create your views here.
 
 #wangli00 18!@#wangli
@@ -36,23 +36,11 @@ def login_action(request):
                 #return response
                 #使用session
                 request.session['user1'] = username
-                return HttpResponseRedirect('/project_manage/')
+                return HttpResponseRedirect('/manage/project_manage/')
             else:
                 return render(request,"index.html",{"error":"用户名或密码错误！"})
 
-@login_required#判断用户是否登录
-def project_manage(request):
-    #return render(request,"project_manage.html")
-    #使用cookie
-    #username  = request.COOKIES.get('user','')
-    #return render(request,"project_manage.html",{"user":username})
-    username = request.session.get('user1','')
 
-    #显示出实际数据
-    project_all = Project.objects.all()
-    print(project_all)
-    return render(request,"project_manage.html",{"user":username,
-                                                 "projects":project_all})
 
 #退出登录，清除登录状态
 def logout(request):

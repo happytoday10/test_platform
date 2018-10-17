@@ -1,6 +1,6 @@
 from django.contrib import admin
-'''
-from user_app.models import Project,Module
+
+from project_app.models import Project,Module
 
 # Register your models here.
 
@@ -12,4 +12,3 @@ class ModuleAdmin(admin.ModelAdmin):
 
 admin.site.register(Project,ProjectAdmin)
 admin.site.register(Module,ModuleAdmin)
-'''

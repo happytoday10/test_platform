@@ -1,0 +1,6 @@
+1015
+ python manage.py makemigrations
+
+  python manage.py migrate
+  与数据库数据同步
+  

@@ -50,7 +50,7 @@ class IndexTest(TestCase):
     def test_index(self):
          """测试index.html"""
          response = self.client.get('/')
-         print(response.content.decode("utf-8"))
+         # print(response.content.decode("utf-8"))
          self.assertEqual(response.status_code, 200)
          self.assertTemplateUsed(response,"index.html")
 
@@ -72,13 +72,14 @@ class LoginTest(TestCase):
 
     def test_login_error(self):
         """用户名密码错误.html"""
-        response = self.client.post('/login_action/')
         login_data = {"username": "3", "password": "3"}
+        response = self.client.post('/login_action/',login_data)
+
 
         login_html = response.content.decode("utf-8")
         #
         self.assertEqual(response.status_code, 200)
-        self.assertIn("用户名或密码错误", login_html)
+        self.assertIn("用户名或密码错误！", login_html)
 
     def test_login_success(self):
          """用户名密码成功.html"""
@@ -89,3 +90,19 @@ class LoginTest(TestCase):
 
          self.assertEqual(response.status_code, 302)
          # self.assertIn("用户名或密码为空",login_html)
+
+class LogoutTest(TestCase):
+    # 这里的登出的测试，还是应该在登录成功后的测试。而不只是输入logout/
+    def setUp(self):
+        # pass
+        User.objects.create_user("test01","test01@email.com","123456")
+        self.client = Client()
+        login_data = {"username":"test01","password":"123456"}
+        response = self.client.post("/login_action/",login_data)
+        print(response.status_code)
+
+    def test_logout(self):
+        """退出."""
+        response = self.client.post('/logout/')
+        project_html = response.content.decode("utf-8")
+        self.assertEqual(response.status_code, 302)

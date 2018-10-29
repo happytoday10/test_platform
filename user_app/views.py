@@ -39,10 +39,12 @@ def login_action(request):
                 return HttpResponseRedirect('/manage/project_manage/')
             else:
                 return render(request,"index.html",{"error":"用户名或密码错误！"})
-
+    else:
+        return render(request,"index.html")
 
 
 #退出登录，清除登录状态
+@login_required
 def logout(request):
     auth.logout(request)
     response = HttpResponseRedirect('/')#一个/就是重定向

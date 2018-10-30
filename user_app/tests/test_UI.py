@@ -2,6 +2,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver import Chrome
 from django.contrib.auth.models import User
 from time import sleep
+from project_app.models import Project
 
 class LoginTests(StaticLiveServerTestCase):
     #fixtures = ['user-data.json']
@@ -20,6 +21,7 @@ class LoginTests(StaticLiveServerTestCase):
 
     def setUp(self):
         User.objects.create_user("test01", "test01@email.com", "123456")
+        Project.objects.create(name="项目1",describe="这个不错呦！")
 
     def test_login(self):
         self.driver.get('%s%s' % (self.live_server_url, '/'))

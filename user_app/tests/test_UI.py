@@ -13,7 +13,6 @@ class LoginTests(StaticLiveServerTestCase):
         cls.driver = Chrome()
         cls.driver.implicitly_wait(10)
 
-
     @classmethod
     def tearDownClass(cls):
         cls.driver.quit()
@@ -48,6 +47,18 @@ class LoginTests(StaticLiveServerTestCase):
         self.assertEqual("用户名或密码错误！",error_message)
 
     def test_login_success(self):
+        self.driver.get('%s%s' % (self.live_server_url, '/'))
+        username_input = self.driver.find_element_by_id("username")
+        username_input.send_keys('test01')
+        password_input = self.driver.find_element_by_id("password")
+        password_input.send_keys('123456')
+        sleep(2)
+        self.driver.find_element_by_id('submit').click()
+        sleep(4)
+        message = self.driver.find_element_by_class_name("navbar-brand").text
+        self.assertEqual("测试平台", message)
+
+    def test_project_edit(self):
         self.driver.get('%s%s' % (self.live_server_url, '/'))
         username_input = self.driver.find_element_by_id("username")
         username_input.send_keys('test01')

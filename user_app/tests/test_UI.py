@@ -2,7 +2,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver import Chrome
 from django.contrib.auth.models import User
 from time import sleep
-from project_app.models import Project
+from project_app.p_models import Project
 
 class LoginTests(StaticLiveServerTestCase):
     #fixtures = ['user-data.json']

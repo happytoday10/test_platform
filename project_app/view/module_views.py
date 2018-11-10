@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from project_app.models import Module
+from project_app.p_models import Module
 from project_app.forms import ModuleForm
 from django.http import HttpResponseRedirect
 

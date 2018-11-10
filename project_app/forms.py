@@ -6,7 +6,7 @@ class ProjectForm(forms.Form):
     status = forms.BooleanField(label="状态")
 """
 from django.forms import ModelForm
-from .models import Project,Module
+from .p_models import Project,Module
 
 class ProjectForm(ModelForm):
     class Meta:

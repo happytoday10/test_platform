@@ -54,6 +54,7 @@
             <p style="color:#8B8989">说明：以字典的方式设置参数，如：{"id":1, "name":"名称"}</p>
             <div style="width: 100%; height: 60px;">
                 <button type="button" class="btn btn-success" id="send" style="float: right;margin-right: 10px;">调试</button>
+                 <button type="button" class="btn btn-success" id="save" style="float: right;margin-right: 10px;">保存</button>
             </div>
 
         </form>
@@ -91,6 +92,33 @@
                  "req_url":url,
                  "req_method": method,
                  "req_parameter":parameter
+             },function(result){
+                 $("#result").html(result);
+             });
+        });
+
+        $("#save").click(function () {
+            let url = $("#req_url").val();
+            let method = $('input[name="req_method"]:checked').val();
+            let parameter = $("#req_parameter").val();
+            let req_type = $('input[name="req_type"]:checked').val();
+            let header = $("#req_header").val();
+            console.log(url, method,parameter,req_type,header);
+            // window.alert(url);
+            if(url === ""){
+                window.alert("请求的url不能为空")
+            }else if(method === ""){
+                window.alert("方法不能为空！")
+            }else if(parameter === ""){
+                parameter = "{}";
+            }
+            //发送一个post请求。
+             $.post("/interface/save_case/",{
+                 "req_url":url,
+                 "req_method": method,
+                 "req_parameter":parameter,
+                 "req_type":req_type,
+                 "req_header":req_header
              },function(result){
                  $("#result").html(result);
              });

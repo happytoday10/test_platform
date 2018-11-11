@@ -9,6 +9,15 @@
          <div style="width:80%; margin-left: 20px;">
         <form action="/debug/" method="get" class="bs-example bs-example-form" role="form" style="margin-top: 30px">
 
+            <div class="form-group">
+                <label class="col-sm-2 control-label">项目</label>
+                <div class="col-sm-10">
+                    {{form.project}}
+                </div>
+            </div>
+
+            <br>
+
             <div class="input-group">
                 <span class="input-group-addon">名称</span>
                 <input id="req_name" type="text" class="form-control" placeholder="name">
@@ -103,6 +112,7 @@
             let parameter = $("#req_parameter").val();
             let req_type = $('input[name="req_type"]:checked').val();
             let header = $("#req_header").val();
+            let module_id = $('select[name="module"]').val();
             console.log(url, method,parameter,req_type,header);
             // window.alert(url);
             if(url === ""){
@@ -118,7 +128,8 @@
                  "req_method": method,
                  "req_parameter":parameter,
                  "req_type":req_type,
-                 "req_header":req_header
+                 "req_header":req_header,
+                 "module": module_id
              },function(result){
                  $("#result").html(result);
              });

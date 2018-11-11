@@ -28,7 +28,7 @@ urlpatterns = [
 
     #这里把一级目录是manage的指定到 project_app目录下的urls文件
      path("manage/",include("project_app.urls")),
-     path('interface/',include("interface_app.urls"))
+     path('interface/',include("interface_app.urls")),
 ]
 
 #初始化数据库：python manage.py migrate

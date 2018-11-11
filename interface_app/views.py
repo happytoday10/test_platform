@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 import requests
 import json
-from project_app.forms import ModuleForm
+from interface_app.forms import TestCaseForm
 # Create your views here.
 
 def case_manage(request):
@@ -15,7 +15,7 @@ def case_manage(request):
 #创建调试接口
 def debug(request):
     if request.method == "GET":
-        form = ModuleForm()
+        form = TestCaseForm()
         return render(request,"api_debug.html",{
             "form": form,
             "type" : "debug"
@@ -43,6 +43,23 @@ def api_debug(request):
         print(r.text)
             # resp = r.json()
         return HttpResponse(r.text)
+    else:
+        return render(request, "api_debug.html", {
+                "type": "debug"
+            })
+
+def save_case(request):
+    """
+    保存用例
+    """
+    if request.method == "POST":
+        url = request.POST.get("req_url")
+        method = request.POST.get("req_method")
+        parameter = request.POST.get("req_parameter")
+        req_type = request.POST.get("req_type")
+        header = request.POST.get("header")
+        module_id = request.POST.get("module_id")
+
     else:
         return render(request, "api_debug.html", {
                 "type": "debug"

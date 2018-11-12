@@ -11,9 +11,11 @@
 
             <div class="form-group">
                 <label class="col-sm-2 control-label">项目</label>
-                <div class="col-sm-10">
-                    {{form.project}}
-                </div>
+                <select id = "project_name"></select>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">模块</label>
+                <select id = "module_name"></select>
             </div>
 
             <br>
@@ -85,11 +87,14 @@
     $(document).ready(function(){
         $("#send").click(function () {
             let url = $("#req_url").val();
+            let name = $("#req_name").val()
             let method = $('input[name="req_method"]:checked').val();
             let parameter = $("#req_parameter").val()
             console.log(url, method,parameter);
             // window.alert(url);
-            if(url === ""){
+            if(name === ""){
+                window.alert("请求的名称不能为空")
+            }else if(url === ""){
                 window.alert("请求的url不能为空")
             }else if(method === ""){
                 window.alert("方法不能为空！")
@@ -99,6 +104,7 @@
             //发送一个post请求。
              $.post("/interface/api_debug/",{
                  "req_url":url,
+                 "req_name":name,
                  "req_method": method,
                  "req_parameter":parameter
              },function(result){

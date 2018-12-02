@@ -64,18 +64,18 @@ def search_case_name(request):
         return render(request,"case_manage.html",{
             "type":"list",
             "testases":contacts,
-            "case_name": case_name
+            "case_name": contacts
         })
     else:
         return HttpResponse("404")
 
-#创建/调试接口
-def debug(request):
+#创建/调试用例
+def add_case(request):
     if request.method =="GET":
         form = TestCaseForm()
-        return render(request,"api_debug.html",{
+        return render(request, "add_case.html", {
             "form" : form,
-            "type" : "debug"
+            "type" : "add"
         })
     else:
         return HttpResponse("404")
@@ -90,3 +90,69 @@ def api_debug(request):
         if method =="get":
             r = requests.get(url, params=payload)
 
+
+
+#编辑/调试用例
+def debug_case(request, cid):
+    if request.method =="GET":
+        form = TestCaseForm()
+        return render(request, "debug_case.html", {
+            "form" : form,
+            "type" : "debug"
+        })
+    else:
+        return HttpResponse("404")
+#获取接口信息接口
+def get_case_info(request):
+    if request.method == "POST":
+        case_id  = request.POST.get("caseId","")
+        if case_id =="":
+            return JsonResponse({"success":"false","message":"case id is null"})
+        case_obj = TestCase.objects.get(pk=case_id)
+        #pk也是id，用它避免了关键字重复
+        #打印模块的id
+        print('模块id：',case_obj.module_id)
+        mid = case_obj.module_id
+        module_obj = Module.objects.get(id = mid)
+        module_name = module_obj.name
+
+        pid = module_obj.project_id
+        print("项目id：",pid)
+        project_obj = Project.objects.get(id = pid)
+        project_name = project_obj.name
+
+
+
+
+
+        case_info={
+            "project_name":project_name,
+            "module_name":module_name,
+            "name":case_obj.name,
+            "url":case_obj.url,
+            "req_method":case_obj.req_method,
+            "req_type":case_obj.req_type,
+            "req_parameter":case_obj.req_parameter,
+            "req_header":case_obj.req_header
+        }
+        return JsonResponse({"success": "true", "message": "ok","data":case_info})
+
+    else:
+        return HttpResponse("404")
+
+#验证预期结果
+def api_assert(request):
+    if request.method == "POST":
+        result_text = request.POST.get("result")
+        assert_text = request.POST.get("assert","")
+
+        if result_text =="" or assert_text == "":
+            return JsonResponse({"success":"false","message":"验证的数据不能为空"})
+        try:
+            assert assert_text in result_text
+        except AssertionError:
+            return JsonResponse({"success":"false","message":"验证shibai"})
+        else:
+            return JsonResponse({"success":"true","message":"验证成功"})
+    else:
+        return JsonResponse("404")

@@ -18,7 +18,7 @@ def case_manage(request):
 def debug(request):
     if request.method == "GET":
         form = TestCaseForm()
-        return render(request,"api_debug.html",{
+        return render(request, "add_case.html", {
             "form": form,
             "type" : "debug"
         })
@@ -46,7 +46,7 @@ def api_debug(request):
             # resp = r.json()
         return HttpResponse(r.text)
     else:
-        return render(request, "api_debug.html", {
+        return render(request, "add_case.html", {
                 "type": "debug"
             })
 
@@ -77,6 +77,6 @@ def save_case(request):
             return HttpResponse("保存成功！")
 
     else:
-        return render(request, "api_debug.html", {
+        return render(request, "add_case.html", {
                 "type": "debug"
             })
